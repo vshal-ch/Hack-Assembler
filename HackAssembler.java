@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import src.*;
 
 public class HackAssembler{
     public static HashMap<String,String> configMap = new HashMap<>();
@@ -90,7 +91,7 @@ public class HackAssembler{
     }
 
     public static void load_config() throws Exception{
-        File configFile = new File("config.txt");
+        File configFile = new File("./res/config.txt");
         Scanner configScanner = new Scanner(configFile);
         System.out.println("Loading config file");
         while(configScanner.hasNextLine()){

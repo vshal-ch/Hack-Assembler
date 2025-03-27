@@ -1,3 +1,5 @@
+package src;
+
 import java.util.*;
 import java.io.*;
 
@@ -12,7 +14,7 @@ public class Converter{
         }
         
         //Loading Compute Instruction map
-        File computeInstrMapFile = new File(computeFilePath);
+        File computeInstrMapFile = new File("./res/"+computeFilePath);
         Scanner instrMapScanner = new Scanner(computeInstrMapFile);
         System.out.println("Loading Compute Instruction map");
         while(instrMapScanner.hasNextLine()){
@@ -27,7 +29,7 @@ public class Converter{
 
         //Loading jump Instruction map
         String jumpFilePath = (String) config.get("jump_map_file");
-        File jumpInstrMapFile = new File(jumpFilePath);
+        File jumpInstrMapFile = new File("./res/"+jumpFilePath);
         instrMapScanner = new Scanner(jumpInstrMapFile);
         System.out.println("Loading jump Instruction map");
         while(instrMapScanner.hasNextLine()){
