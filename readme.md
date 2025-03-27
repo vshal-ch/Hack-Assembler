@@ -4,5 +4,7 @@ Simple program that converts Hack assembly language programs into binary instruc
 ### Usage
 ```bash
 javac HackAssembler.java
+```
+```
 java HackAssembler ./inputs/Pong.asm -o Pong.hack
 ```
