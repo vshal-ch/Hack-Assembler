@@ -93,7 +93,7 @@ public class Converter{
     }
 
     private static String get_jump(String jump) throws Exception{
-        if(jump == ""){
+        if(jump != null && jump.equals("")){
             return "000";
         }
         String jumpBinStr = jumpInstMap.get(jump);

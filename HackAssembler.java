@@ -9,14 +9,20 @@ public class HackAssembler{
             return;
         }
 
+        String outFileName = "Prog.hack";
+        if(args.length == 3){
+            if(args[1].trim().equals("-o")){
+                outFileName = args[2];
+            }
+        }
+
         load_config();
 
         String asmFileName = args[0];
         File asmFile = new File(asmFileName);
-
-        File outFile = new File("Prog.hack");
+        File outFile = new File(outFileName);
         System.out.println("Input file: "+asmFile.getPath());
-        System.out.println("Output file: Prog.hack");
+        System.out.println("Output file: "+outFile.getPath());
 
         Parser parser;
         try{
@@ -44,8 +50,8 @@ public class HackAssembler{
         }
 
         Converter.load_maps(configMap);
-        BufferedWriter writer = new BufferedWriter(new FileWriter("Prog.hack"));
-        System.out.println("Writing binary instructions to out file");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(outFile));
+        System.out.println("Writing binary instructions to: "+outFile.getPath());
 
         for(String instruction: instructions){
             parser.currentInstruction = instruction;
@@ -56,7 +62,13 @@ public class HackAssembler{
             }
             else if(type == Parser.A_INSTRUCTION){
                 String symbol = parser.symbol();
-                int number = symTable.get(symbol);
+                int number;
+                try{
+                    number = Integer.parseInt(symbol);
+                }
+                catch(NumberFormatException e){
+                    number = symTable.get(symbol);
+                }
                 try{
                     bin16bit = Converter.convert_a(Integer.toString(number));
                 }
@@ -72,7 +84,7 @@ public class HackAssembler{
             writer.write(bin16bit+"\n");
         }
 
-        System.out.println("Binary instructions writen to out file");
+        System.out.println("Binary instructions writen to: "+outFile.getPath());
 
         writer.close();
     }

@@ -17,6 +17,9 @@ public class Parser{
     public Parser(File file) throws FileNotFoundException{
         this.scanner = new Scanner(file);
         this.next = this.scanner.hasNextLine() ? this.scanner.nextLine() : null;
+        while(this.next != null && (this.next.trim().length()==0 || this.next.trim().startsWith("//"))){
+            this.next = this.scanner.hasNextLine() ? this.scanner.nextLine() : null;
+        }
     }
 
     public boolean hasMorelines(){
@@ -24,9 +27,9 @@ public class Parser{
     }
 
     public void next(){
-        this.currentInstruction = this.next;
+        this.currentInstruction = this.next.trim();
         this.next = this.scanner.hasNextLine() ? this.scanner.nextLine() : null;
-        while(this.next != null && this.next.trim().length()==0){
+        while(this.next != null && (this.next.trim().length()==0 || this.next.trim().startsWith("//"))){
             this.next = this.scanner.hasNextLine() ? this.scanner.nextLine() : null;
         }
     }
